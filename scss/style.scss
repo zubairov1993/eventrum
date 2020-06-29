@@ -1,11 +1,12 @@
 
 $color: #fff;
 $orange: rgb(250, 129, 29);
-$yellow: rgb(244, 248, 2);
-$blue: rgb(2, 219, 248);
-$green: rgb(59, 248, 2);
+$yellow: yellow;
+$blue: rgb(0, 195, 255);
+$green: lightgreen;
 $lightOrange: rgb(248, 211, 2);
-$purple: rgb(96, 2, 248);
+$purple: purple;
+$fontFam: 'Kanit', sans-serif;
 
 
 @mixin  btns($background, $color, $fWeight) {
@@ -18,15 +19,28 @@ $purple: rgb(96, 2, 248);
     border: none;
 }
 
-@mixin headNum($color) {
-    font-size: 60px;
+@mixin headNum($color, $padLeft, $fonSiz) {
+    font-size: $fonSiz;
     color: $color;
+    padding-left: $padLeft;
+}
+
+@mixin title2($color) {
+    color: $color;
+    font-size: 30px;
+}
+
+@mixin title3($color, $fWeigh) {
+    color: $color;
+    font-weight: $fWeight;
+    font-size: 20px;
 }
 
 
 *{
     padding: 0;
     margin: 0;
+    font-family: $fontFam;
 }
 
 a{
@@ -41,8 +55,26 @@ li{
 .wrapper{
     max-width: 1200px;
     margin: 0 auto;
+
+    @media screen and (max-width: 1250px) {
+        max-width: 900px;
+    }
+
+    @media screen and (max-width: 950px) {
+        max-width: 700px;
+    }
+
+    @media screen and (max-width: 750px) {
+        max-width: 550px;
+    }
+
+    @media screen and (max-width: 550px) {
+        max-width: 90%;
+    }
 }
 
+
+//header
 
 .header{
     width: 100%;
@@ -50,8 +82,25 @@ li{
     background: url('../img/01.jpg') no-repeat;
     background-size: cover;
 
+    & > .wrapper{
+        height: 100%;
+    }
+
+    h1{
+        color: #fff;
+        font-size: 50px;
+    
+        @media screen and (max-width: 750px) {
+            font-size: 40px;
+        }
+    }
+
     ul{
         display: flex;
+
+        @media screen and (max-width: 750px) {
+            justify-content: center;
+        }
     }
 
     &__nav{
@@ -59,60 +108,134 @@ li{
         justify-content: space-between;
         width: 100%;
         padding-top: 30px;
+
+        @media screen and (max-width: 750px) {
+            justify-content: center;
+        }
+
+
+        .burger{
+            color: #fff;
+            font-size: 25px;
+            display: none;
+
+            @media screen and (max-width: 950px) {
+                display: block;
+            }
+        }
     }
 
     &__links{
         display: flex;
         align-items: center;
 
+        @media screen and (max-width: 950px) {
+            display: none;
+        }
+
         button{
-            @include btns(red, white, bold);
+            @include btns($orange, white, bold);
         }
 
         li{
-            padding-right: 20px;
+            padding-right: 20px; 
         }
+
+        
     }
     
     &__text{
-        padding-top: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-        li:nth-child(1){
-            @include headNum($yellow);
-        }
-        li:nth-child(2){
-            @include headNum($orange);
-        }
-        li:nth-child(3){
-            @include headNum($blue);
-        }
-        li:nth-child(4){
-            @include headNum($green);
+        @media screen and (max-width: 750px) {
+            text-align: center;
         }
 
-        li p{
-            font-size: 30px;
+        li{
+            @media screen and (max-width: 550px) {
+                padding-left: 20px !important;
+                font-size: 40px !important;
+            }
+
+            @media screen and (max-width: 400px) {
+                padding-left: 10px !important;
+                display: none;
+            }
+
+            &:nth-child(1){
+                padding-left: 0 !important;
+            }
+        }
+        
+
+        p{
+            font-size: 20px;
             color: #fff;
         }
-    
-        // &_item-2{
-        //     @include headNum();
-        // }
-        // &_item-3{
-        //     @include headNum();
-        // }
-        // &_item-4{
-        //     @include headNum();
-        // }
+
+        li:nth-child(1){
+            @include headNum($yellow, 0, 60px);
+        }
+        li:nth-child(2){
+            @include headNum($orange, 40px, 60px);
+        }
+        li:nth-child(3){
+            @include headNum($blue, 40px, 60px);
+        }
+        li:nth-child(4){
+            @include headNum($green, 40px, 60px);
+        }
 
     }
-    // .header__text_item{
-    //     @include headNum($yellow);
-    //     font-size: 30px;
-    // }
-
-
-
 }
 
+//header
+
+//tickets
+
+.tickets{
+    width: 100%;
+
+    & > .wrapper{
+        display: flex;
+        padding: 120px 0;
+    }
+
+    &__text{
+        padding-left: 35px;
+
+        h2{
+            @include title2($purple);
+        }
+
+        & > h3{
+            @include title3(black, bold);
+        }
+
+        & > p{
+            padding-top: 20px;
+        }
+
+        &_btn-1{
+            @include btns($purple, #fff, 400);
+            margin-top: 20px;
+        }
+
+        &_btn-2{
+            @include btns($green, #fff, bold);
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+    }
+}
+
+
+
+
+
+
+//tickets
 
